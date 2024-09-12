@@ -137,11 +137,11 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         // TODO: optimize transform application
         if (deferMarkers) {
             deferredMarkers.add(new Marker(
-                    x,
-                    y,
-                    size,
-                    color,
-                    transform
+                x,
+                y,
+                size,
+                color,
+                transform
             ));
             return;
         }
