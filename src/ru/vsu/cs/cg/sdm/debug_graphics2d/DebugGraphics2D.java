@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.CubicCurve2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
+import java.awt.geom.QuadCurve2D;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -59,6 +61,17 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         if (debuggingEnabled) {
             if (s instanceof GeneralPath path) {
                 drawMarkersOnPath(path);
+            }
+            if (s instanceof QuadCurve2D quad) {
+                drawCircleMarker(quad.getX1(), quad.getY1());
+                drawCircleMarker(quad.getCtrlX(), quad.getCtrlY());
+                drawCircleMarker(quad.getX2(), quad.getY2());
+            }
+            if (s instanceof CubicCurve2D cube) {
+                drawCircleMarker(cube.getX1(), cube.getY1());
+                drawCircleMarker(cube.getCtrlX1(), cube.getCtrlY1());
+                drawCircleMarker(cube.getCtrlX2(), cube.getCtrlY2());
+                drawCircleMarker(cube.getX2(), cube.getY2());
             }
         }
     }
