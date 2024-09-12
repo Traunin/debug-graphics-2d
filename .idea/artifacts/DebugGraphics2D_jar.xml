@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DebugGraphics2D:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DebugGraphics2D_jar</output-path>
+    <root id="archive" name="DebugGraphics2D.jar">
+      <element id="module-output" name="DebugGraphics2D" />
+    </root>
+  </artifact>
+</component>
