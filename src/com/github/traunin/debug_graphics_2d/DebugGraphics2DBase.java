@@ -1,4 +1,4 @@
-package ru.vsu.cs.cg.sdm.debug_graphics2d;
+package com.github.traunin.debug_graphics_2d;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -31,9 +31,11 @@ import java.util.Map;
  */
 public class DebugGraphics2DBase extends Graphics2D {
     private final Graphics2D g2d;
+
     public DebugGraphics2DBase(Graphics2D g2d) {
         this.g2d = g2d;
     }
+
     @Override
     public void draw(Shape s) {
         g2d.draw(s);
