@@ -1,4 +1,4 @@
-package ru.vsu.cs.cg.sdm.debug_graphics2d;
+package com.github.traunin.debug_graphics_2d;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

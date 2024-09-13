@@ -20,7 +20,7 @@ g2d.drawDeferredMarkers(); // draw all of the deferred markers on the top layer
 
 ## Compiling
 To compile this library:
-1. Run `javac -d out/cls src/ru/vsu/cs/cg/sdm/debug_graphics2d/*.java` in the project directory to compile all of the classes to .class files
+1. Run `javac -d out/cls com/github/traunin/debug_graphics_2d/*.java` in the project directory to compile all of the classes to .class files
 2. Run `jar cf DebugGraphics2D.jar -C out/cls .` to create a .jar file
 --------
 Alternetively, if you are using Intellij Idea: 

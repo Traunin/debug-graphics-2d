@@ -1,4 +1,4 @@
-package ru.vsu.cs.cg.sdm.examples;
+package com.github.traunin.examples;
 
 import java.awt.Dimension;
 import javax.swing.JButton;
