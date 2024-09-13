@@ -47,11 +47,27 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     }
 
     @Override
+    public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
+        super.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+        if (debuggingEnabled) {
+            drawMarkersAtRectCorners(x, y, width, height);
+        }
+    }
+
+    @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
         super.drawLine(x1, y1, x2, y2);
         if (debuggingEnabled) {
             drawCircleMarker(x1, y1);
             drawCircleMarker(x2, y2);
+        }
+    }
+
+    @Override
+    public void drawOval(int x, int y, int width, int height) {
+        super.drawOval(x, y, width, height);
+        if (debuggingEnabled) {
+            drawMarkersAtRectCorners(x, y, width, height);
         }
     }
 
