@@ -1,4 +1,4 @@
-package ru.vsu.cs.cg.sdm.debug_graphics2d;
+package com.github.traunin.debug_graphics_2d;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,10 +13,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * {@code DebugGraphics2d} is a superset of {@link Graphics2D}. It allows you to debug more
- * efficiently by drawing points at the shape's corners. Control whether debugging is enabled by
- * calling {@code disableDebugging} and {@code enableDebugging}. Use {@code setDebugColor} to change
- * the color of the marker and {@code setDebugMarkerSize} to change the size. When drawing multiple
+ * {@code DebugGraphics2d} is a superset of {@link Graphics2D}. It allows you to
+ * debug more
+ * efficiently by drawing points at the shape's corners. Control whether
+ * debugging is enabled by
+ * calling {@code disableDebugging} and {@code enableDebugging}. Use
+ * {@code setDebugColor} to change
+ * the color of the marker and {@code setDebugMarkerSize} to change the size.
+ * When drawing multiple
  * objects,
  */
 public class DebugGraphics2D extends DebugGraphics2DBase {
@@ -26,6 +30,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     private boolean debuggingEnabled = true;
     private boolean deferMarkers = false;
     Queue<Marker> deferredMarkers = new LinkedList<>();
+
     public DebugGraphics2D(Graphics2D g2d) {
         super(g2d);
         this.g2d = g2d;
@@ -81,6 +86,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
             drawMarkersAtRectCorners(x, y, width, height);
         }
     }
+
     @Override
     public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
         super.fillPolygon(xPoints, yPoints, nPoints);
@@ -169,7 +175,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         while (!iterator.isDone()) {
             int segType = iterator.currentSegment(coords);
 
-            switch(segType) {
+            switch (segType) {
                 case PathIterator.SEG_MOVETO, PathIterator.SEG_LINETO:
                     drawCircleMarker(coords[0], coords[1]);
                     break;
@@ -198,12 +204,11 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
 
     private void drawCircleMarker(Marker marker) {
         drawCircleMarker(
-            marker.x(),
-            marker.y(),
-            marker.size(),
-            marker.color(),
-            marker.transform()
-        );
+                marker.x(),
+                marker.y(),
+                marker.size(),
+                marker.color(),
+                marker.transform());
     }
 
     public void drawCircleMarker(int x, int y, int size) {
@@ -219,12 +224,11 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         // TODO: optimize transform application
         if (deferMarkers) {
             deferredMarkers.add(new Marker(
-                x,
-                y,
-                size,
-                color,
-                transform
-            ));
+                    x,
+                    y,
+                    size,
+                    color,
+                    transform));
             return;
         }
         g2d.setTransform(transform);
@@ -273,5 +277,6 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         }
     }
 
-    private record Marker(int x, int y, int size, Color color, AffineTransform transform) {}
+    private record Marker(int x, int y, int size, Color color, AffineTransform transform) {
+    }
 }

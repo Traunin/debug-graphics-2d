@@ -1,16 +1,17 @@
-package ru.vsu.cs.cg.sdm.examples;
+package com.github.traunin.examples;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 import javax.swing.JPanel;
-import ru.vsu.cs.cg.sdm.debug_graphics2d.DebugGraphics2D;
+import com.github.traunin.debug_graphics_2d.DebugGraphics2D;
 
 public class TestPanel extends JPanel {
     private final int width;
     private final int height;
     GeneralPath leafPath = new GeneralPath();
+
     public TestPanel(int width, int height) {
         this.width = width;
         this.height = height;
