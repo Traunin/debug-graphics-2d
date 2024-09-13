@@ -2,6 +2,7 @@ package ru.vsu.cs.cg.sdm.debug_graphics2d;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.CubicCurve2D;
@@ -53,6 +54,21 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
             drawMarkersAtRectCorners(x, y, width, height);
         }
     }
+    @Override
+    public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
+        super.fillPolygon(xPoints, yPoints, nPoints);
+        if (debuggingEnabled) {
+            drawMarkersAtPolygonCorners(xPoints, yPoints, nPoints);
+        }
+    }
+
+    @Override
+    public void drawPolygon(Polygon p) {
+        super.drawPolygon(p);
+        if (debuggingEnabled) {
+            drawMarkersAtPolygonCorners(p.xpoints, p.ypoints, p.npoints);
+        }
+    }
 
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
@@ -75,20 +91,22 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     public void draw(Shape s) {
         super.draw(s);
         if (debuggingEnabled) {
-            if (s instanceof GeneralPath path) {
-                drawMarkersOnPath(path);
-            }
             if (s instanceof QuadCurve2D quad) {
                 drawCircleMarker(quad.getX1(), quad.getY1());
                 drawCircleMarker(quad.getCtrlX(), quad.getCtrlY());
                 drawCircleMarker(quad.getX2(), quad.getY2());
+                return;
             }
+
             if (s instanceof CubicCurve2D cube) {
                 drawCircleMarker(cube.getX1(), cube.getY1());
                 drawCircleMarker(cube.getCtrlX1(), cube.getCtrlY1());
                 drawCircleMarker(cube.getCtrlX2(), cube.getCtrlY2());
                 drawCircleMarker(cube.getX2(), cube.getY2());
+                return;
             }
+
+            drawMarkersOnPath(s.getPathIterator(null));
         }
     }
 
@@ -96,9 +114,12 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     public void fill(Shape s) {
         super.fill(s);
         if (debuggingEnabled) {
-            if (s instanceof GeneralPath path) {
-                drawMarkersOnPath(path);
+            if (s instanceof Polygon p) {
+                drawMarkersAtPolygonCorners(p.xpoints, p.ypoints, p.npoints);
+                return;
             }
+
+            drawMarkersOnPath(s.getPathIterator(null));
         }
     }
 
@@ -109,8 +130,13 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         drawCircleMarker(x, y + height);
     }
 
-    public void drawMarkersOnPath(GeneralPath path) {
-        PathIterator iterator = path.getPathIterator(null);
+    public void drawMarkersAtPolygonCorners(int[] xPoints, int[] yPoints, int nPoints) {
+        for (int i = 0; i < nPoints; i++) {
+            drawCircleMarker(xPoints[i], yPoints[i]);
+        }
+    }
+
+    private void drawMarkersOnPath(PathIterator iterator) {
         double[] coords = new double[6];
 
         while (!iterator.isDone()) {
