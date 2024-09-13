@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.GeneralPath;
 import javax.swing.JPanel;
-
 import com.github.traunin.debug_graphics_2d.DebugGraphics2D;
 
 public class TestPanel extends JPanel {
