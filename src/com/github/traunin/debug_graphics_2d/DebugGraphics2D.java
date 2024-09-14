@@ -39,6 +39,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void fillRect(int x, int y, int width, int height) {
         super.fillRect(x, y, width, height);
+
         if (debuggingEnabled) {
             drawMarkersAtRectCorners(x, y, width, height);
         }
@@ -74,6 +75,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void fillOval(int x, int y, int width, int height) {
         super.fillOval(x, y, width, height);
+
         if (debuggingEnabled) {
             drawMarkersAtRectCorners(x, y, width, height);
         }
@@ -82,6 +84,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void drawRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight) {
         super.drawRoundRect(x, y, width, height, arcWidth, arcHeight);
+
         if (debuggingEnabled) {
             drawMarkersAtRectCorners(x, y, width, height);
         }
@@ -90,6 +93,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints) {
         super.fillPolygon(xPoints, yPoints, nPoints);
+
         if (debuggingEnabled) {
             drawMarkersAtPolygonCorners(xPoints, yPoints, nPoints);
         }
@@ -98,6 +102,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void drawPolygon(Polygon p) {
         super.drawPolygon(p);
+
         if (debuggingEnabled) {
             drawMarkersAtPolygonCorners(p.xpoints, p.ypoints, p.npoints);
         }
@@ -106,6 +111,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
         super.drawLine(x1, y1, x2, y2);
+
         if (debuggingEnabled) {
             drawCircleMarker(x1, y1);
             drawCircleMarker(x2, y2);
@@ -115,6 +121,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void drawOval(int x, int y, int width, int height) {
         super.drawOval(x, y, width, height);
+
         if (debuggingEnabled) {
             drawMarkersAtRectCorners(x, y, width, height);
         }
@@ -123,6 +130,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void draw(Shape s) {
         super.draw(s);
+
         if (debuggingEnabled) {
             if (s instanceof QuadCurve2D quad) {
                 drawCircleMarker(quad.getX1(), quad.getY1());
@@ -146,6 +154,7 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
     @Override
     public void fill(Shape s) {
         super.fill(s);
+
         if (debuggingEnabled) {
             if (s instanceof Polygon p) {
                 drawMarkersAtPolygonCorners(p.xpoints, p.ypoints, p.npoints);
@@ -204,11 +213,12 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
 
     private void drawCircleMarker(Marker marker) {
         drawCircleMarker(
-                marker.x(),
-                marker.y(),
-                marker.size(),
-                marker.color(),
-                marker.transform());
+            marker.x(),
+            marker.y(),
+            marker.size(),
+            marker.color(),
+            marker.transform()
+        );
     }
 
     public void drawCircleMarker(int x, int y, int size) {
@@ -224,13 +234,15 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         // TODO: optimize transform application
         if (deferMarkers) {
             deferredMarkers.add(new Marker(
-                    x,
-                    y,
-                    size,
-                    color,
-                    transform));
+                x,
+                y,
+                size,
+                color,
+                transform
+            ));
             return;
         }
+
         g2d.setTransform(transform);
         Color currentColor = g2d.getColor();
         g2d.setColor(color);
@@ -277,6 +289,5 @@ public class DebugGraphics2D extends DebugGraphics2DBase {
         }
     }
 
-    private record Marker(int x, int y, int size, Color color, AffineTransform transform) {
-    }
+    private record Marker(int x, int y, int size, Color color, AffineTransform transform) {}
 }
