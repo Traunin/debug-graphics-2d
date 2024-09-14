@@ -21,7 +21,9 @@ import java.util.Queue;
  * {@code setDebugColor} to change
  * the color of the marker and {@code setDebugMarkerSize} to change the size.
  * When drawing multiple
- * objects,
+ * objects, use {@code startDeferringMarkers} before draw calls and
+ * {@code drawDeferredMarkers} at the end so that all the markers appear
+ * on the top layer
  */
 public class DebugGraphics2D extends DebugGraphics2DBase {
     private final Graphics2D g2d;
