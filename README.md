@@ -2,15 +2,19 @@
 
 The following library is a superset of Java's Graphics2D class which allows users to display markers at primitives' control points for debugging purposes.
 
-## Prerequisites
+## Download
 
-- JDK (preferably 21 or newer)
-- `javac` and `jar` in PATH
-- `git` (to clone the repository, not necessary)
+If you don't want to build the library yourself, you can download the jar file from the releases tab.
 
 ## Building
 
 ### Manually
+
+Prerequisites:
+
+- JDK (preferably 21 or newer)
+- `javac` and `jar` in PATH
+- `git` (to clone the repository, not necessary)
 
 Clone the repository:
 
